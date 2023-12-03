@@ -10,7 +10,7 @@ def part1() -> int:
     with open("puzzle", "r") as f:
         for line in f:
             id, games = line.strip().split(": ")
-            id = int(id.split(" ")[-1])
+            game_id = int(id.split(" ")[-1])
             valid = True
             for game in games.split("; "):
                 for pull in game.split(", "):
@@ -19,7 +19,7 @@ def part1() -> int:
                         valid = False
                         break
             if valid:
-                s += id
+                s += game_id
 
     return s
 
@@ -28,9 +28,8 @@ def part2() -> int:
     s = 0
     with open("puzzle", "r") as f:
         for line in f:
-            id, games = line.strip().split(": ")
-            id = int(id.split(" ")[-1])
-            d = {}
+            _, games = line.strip().split(": ")
+            d: dict[str, int] = {}
             for game in games.split("; "):
                 for pull in game.split(", "):
                     n, color = pull.split(" ")
